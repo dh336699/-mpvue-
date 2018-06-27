@@ -1,4 +1,4 @@
-# yizao
+# 微信小程序mpvue模板
 
 > A Mpvue project
 
