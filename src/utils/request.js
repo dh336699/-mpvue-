@@ -1,6 +1,6 @@
 // import {getToken} from '@/common/urls'
 
-const baseURL = 'https://daihao.frp.dev.wmeimob.com'
+const baseURL = 'http://demon.frp.dev.wmeimob.com'
 
 export function request(url, method, data, needToken) {
   return new Promise((resolve, reject) => {
@@ -38,7 +38,7 @@ export function request(url, method, data, needToken) {
           success(res) {
             if (res.statusCode === 403) {
               wx.redirectTo({
-                url: '/pages/center/register/main'
+                url: '/pages/bindMobile/main'
               })
             } else if (res.statusCode === 401) {
               wx.removeStorageSync('token')

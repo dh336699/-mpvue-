@@ -27,6 +27,7 @@ export default {
     tabBar: {
       color: '#888888',
       selectedColor: '#F3A68D',
+      borderStyle: 'white',
       list: [{
         pagePath: 'pages/index/main',
         text: '首页',

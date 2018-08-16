@@ -1,12 +1,51 @@
 <script>
 export default {
-  created() {
-    // 调用API从本地缓存中获取数据
-    const logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
-
-    console.log('app created and cache logs by setStorageSync')
+  import store from '@/store/index'
+  import * as urls from '@/common/urls'
+  export default {
+    // computed: {
+    //   ...mapGetters({
+    //     getToken: 'getToken'
+    //   })
+    // },
+    data() {
+      return {
+        tokens: ''
+      }
+    },
+    mounted() {
+      // console.log('token', store.getters.getToken)
+      this._getToken()
+    },
+    methods: {
+      _getToken() {
+        let token = store.getters.getToken
+        // let tokens = wx.getStorageSync('token')
+        // console.log(store.getters.getToken)
+        if (!token) {
+          console.log(11)
+          wx.reLaunch({
+            url: './pages/token/main'
+          })
+        } else {
+          urls.userDetail().then(res => {
+            console.log(res)
+            if (res.data.code === 0) {
+              wx.setStorageSync('lang', res.data.data.wechatUser.langStatus)
+              if (res.data.data.wechatUser.phone && !res.data.data.wechatUser.roleId) {
+                wx.reLaunch({
+                  url: '/pages/ceping1/main'
+                })
+              } else if (res.data.data.wechatUser.phone && res.data.data.wechatUser.roleId) {
+                wx.reLaunch({
+                  url: '/pages/salerCenter/main'
+                })
+              }
+            }
+          })
+        }
+      }
+    }
   }
 }
 </script>

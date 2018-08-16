@@ -1,11 +1,7 @@
 <template lang="html">
   <div class="authorize">
-    <div class="shadow">
-      <div class="modal">
-        <p>为了您更好的体验三二零小程序的全部功能，我们请求获取您的用户信息（微信头像、昵称）！</p>
-        <button type="primary" name="button" open-type="getUserInfo" @getuserinfo="getUserInfo">允许</button>
-      </div>
-    </div>
+    <img src="/static/images/logo@2x.png" class="logo">
+    <button type="primary" name="button" open-type="getUserInfo" @getuserinfo="getUserInfo">授权微信用户信息</button>
   </div>
 </template>
 <script>
@@ -16,8 +12,8 @@
       if (!token) {
         return
       } else {
-        wx.redirectTo({
-          url: '/pages/index/main'
+        wx.switchTab({
+          url: '/pages/shouye/main'
         })
       }
     },
@@ -32,10 +28,12 @@
         }
         wx.login({
           success (resLogin) {
+            console.log(userInfo, 'gender')
             if (resLogin.code) {
               const data = {
                 nickname: userInfo.nickName,
                 headimgurl: userInfo.avatarUrl,
+                gender: userInfo.gender.toString(),
                 code: resLogin.code
               }
               console.log(data)
@@ -50,15 +48,15 @@
           console.log(res)
           wx.hideLoading()
           wx.setStorageSync('token', res.data.data.token)
-          wx.redirectTo({
-            url: '/pages/index/main'
+          wx.switchTab({
+            url: '/pages/shouye/main'
           })
         }).catch((msg) => {
           console.log(msg)
           wx.hideLoading()
           wx.setStorageSync('token', msg.data.data.token)
-          wx.redirectTo({
-            url: '/pages/index/main'
+          wx.switchTab({
+            url: '/pages/shouye/main'
           })
         })
       }
@@ -70,27 +68,21 @@
   .authorize {
     width: 100vw;
     height: 100vh;
-    background: #dddddd;
-    .shadow {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100vw;
-      height: 100vh;
-      background: fade(#000000, 50%);
-      .modal {
-        transform: translateY(-30%);
-        padding:40rpx;
-        width: 90vw;
-        box-sizing: border-box;
-        border-radius:12rpx;
-        background: #FFFFFF;
-        p {
-          font-size: 18px;
-          line-height: 30px;
-          padding: 20px 0 40px;
-        }
-      }
+    background: white;
+    text-align: center;
+    .logo {
+      margin: 198rpx 0 256rpx 0;
+      width: 422rpx;
+      height: 190rpx;
+    }
+    button {
+      width:560rpx;
+      height:88rpx;
+      background:rgba(40,160,244,1);
+      border-radius:44rpx;
+      font-size:34rpx;
+      font-family:PingFang-SC-Regular;
+      color:rgba(255,255,255,1);
     }
   }
 </style>
