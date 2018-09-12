@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+@import './layouts.less';
+@import './variables.less';
+@import './class.less';
+
+.btn(@display: block, @height: 88rpx,@bgColor: @black, @borderRadius: 8rpx, @color: @white, @fontSize: 32rpx) {
+  display: @display;
+  height: @height;
+  line-height: @height;
+  background: @bgColor;
+  border-radius: @borderRadius;
+  font-size: @fontSize;
+  font-family: PingFangSC-Medium;
+  color: @color;
+  text-align: center;
+}
+.list(@direction: column, @justifyContent: flex-start, @alignItems: flex-start) {
+  .flex(@direction, @justifyContent, @alignItems);
+}
+.padding(@column: 0, @row: 30rpx) {
+  padding: @column @row;
+}
+.margin(@column: 20rpx, @row: 0) {
+  margin: @column @row;
+}
+.border(@width: 2rpx, @color: #666666) {
+  border: @width solid @color;
+}
+.borderB(@width: 2rpx, @color: #666666) {
+  border-bottom: @width solid @color;
+}
+.throughs(@marginTop: -14rpx) {
+  border-top: 2rpx solid @gray;
+  transform: translateY(@marginTop);
+}
+.font(@fontSize: 36rpx, @color: #333333) {
+  font-size: @fontSize;
+  color: @color;
+  font-family: PingFangSC-Semibold;
+}
+.imgs(@width, @height) {
+  width: @width;
+  height: @height;
+}
+.line-hidden(@clamp: 2) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @clamp;
+}
