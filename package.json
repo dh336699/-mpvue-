@@ -8,7 +8,7 @@
     "dev": "node build/dev-server.js",
     "start": "node build/dev-server.js",
     "build": "rm -rf dist && node build/build.js",
-    "lint": "eslint --ext .js,.vue src"
+    "lint": "eslint --fix --ext .vue src"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
