@@ -36,6 +36,11 @@ export default {
     height: 100%;
     background: #EFEFF4;
   }
+  ::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    color: transparent;
+  }
 .container {
   height: 100%;
   display: flex;

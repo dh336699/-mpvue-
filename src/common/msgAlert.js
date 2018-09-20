@@ -1,14 +1,17 @@
 export const toast = (title, content, callback) => {
   wx.showModal({
-    title: title,
-    content: content,
+    title,
+    content,
     showCancel: false,
     success: callback
-    //     function (res) {
-    //   if (res.confirm) {
-    //     console.log('用户点击确定')
-    //   }
-    // }
+  })
+}
+export const toast2 = (title, content, callback, icon = 'none') => {
+  wx.showToast({
+    title,
+    icon,
+    content,
+    success: callback
   })
 }
 export const accAdd = (arg1, arg2) => {
