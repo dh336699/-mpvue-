@@ -9,7 +9,7 @@
       <span>&nbsp;&nbsp;&nbsp;优惠￥{{discountAmount}}</span>
     </div>
     <div class="add-shopcar" v-if="small" @click="addShopCard">加入购物车</div>
-    <div class="paid-btn" :class="small ? '' : 'active'" v-bind:class="buyNow ? 'actives': ''"  @click="completeOrder">
+    <div class="paid-btn" :class="small ? '' : 'active'" @click="completeOrder">
       {{right}}
     </div>
   </article>
