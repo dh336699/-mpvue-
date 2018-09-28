@@ -6,11 +6,10 @@ export const toast = (title, content, callback) => {
     success: callback
   })
 }
-export const toast2 = (title, content, callback, icon = 'none') => {
+export const toast2 = (title, icon = 'none', callback) => {
   wx.showToast({
     title,
     icon,
-    content,
     success: callback
   })
 }
