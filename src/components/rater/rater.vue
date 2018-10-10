@@ -11,25 +11,29 @@
 <script>
   export default {
     data() {
-      return {}
+      return {
+        grayStar: '/static/images/Shape@2x.png',
+        fullStar: '/static/images/ShapeCopy3@2x.png',
+        halfStar: '/static/images/Group10@2x.png'
+      }
     },
     props: {
       stars: {
         type: Array,
         default: [0, 1, 2, 3, 4]
       },
-      grayStar: {
-        type: String,
-        defult: '/static/images/Shape@2x.png'
-      },
-      fullStar: {
-        type: String,
-        defult: '/static/images/Shape Copy 3@2x.png.png'
-      },
-      halfStar: {
-        type: String,
-        defult: '/static/images/Group 10@2x'
-      },
+      // grayStar: {
+      //   type: String,
+      //   defult: '/static/images/Shape@2x.png'
+      // },
+      // fullStar: {
+      //   type: String,
+      //   defult: '/static/images/ShapeCopy3@2x.png'
+      // },
+      // halfStar: {
+      //   type: String,
+      //   defult: '/static/images/Group10@2x.png'
+      // },
       key: {
         type: Number,
         defult: 4.5
@@ -37,12 +41,14 @@
     },
     methods: {
       selectLeft(item) {
-        console.log(item + 0.5)
+        // console.log(item + 0.5)
         this.key = item + 0.5
+        this.$emit('ratingScore', this.key)
       },
       selectRight(item) {
-        console.log(item + 1)
+        // console.log(item + 1)
         this.key = item + 1
+        this.$emit('ratingScore', this.key)
       }
     },
     components: {}
@@ -51,12 +57,14 @@
 </script>
 
 <style lang='less' scoped>
+  @import '../../common/styles/elements.less';
   .rater-container {
+    min-height: 100%;
     .stars {
       .rating {
         position: absolute;
-        margin-top: -22rpx;
-        margin-left: 328rpx;
+        // margin-top: -22rpx;
+        // margin-left: 328rpx;
         .imgs(44rpx, 44rpx);
         img {
           .imgs(44rpx, 44rpx);
@@ -64,7 +72,7 @@
       }
       .item {
         position: absolute;
-        margin-left: 328rpx;
+        // margin-left: 328rpx;
         .imgs(22rpx, 44rpx);
       }
     }

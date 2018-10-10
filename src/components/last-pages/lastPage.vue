@@ -1,20 +1,29 @@
 <template>
-<div>
-  <div class='last-page' v-if='last.lastPage == true && last.length != 0'><p></p><span>已显示全部</span><p></p></div>
-  <div class='loading' v-if='last.lastPage == false && last.length != 0'>
-    <img src='http://wmeimob-saas.oss-cn-shanghai.aliyuncs.com/mini/life/images/loading.png' />
-    玩命加载中
-  </div>
-  <div class='last-page' v-if="last.type==='empty' && last.length === 0"><p></p><span>没有相关数据哦</span><p></p></div>
-</div>  
+  <div>
+    <div class='last-page' v-if='last.lastPage == true && last.length != 0'><p></p><span>已显示全部</span><p></p></div>
+    <div class='loading' v-if='last.lastPage == false && last.length != 0'>
+      <img src='http://wmeimob-saas.oss-cn-shanghai.aliyuncs.com/mini/life/images/loading.png' />
+      玩命加载中
+    </div>
+    <div class='last-page' v-if="last.type==='empty' && last.length === 0"><p></p><span>没有相关数据哦</span><p></p></div>
+  </div>  
 </template>
 
 <script>
 export default {
-  props: ['last'],
+  // props: ['last'],
   name: 'lastPage',
   data () {
     return {
+    }
+  },
+  props: {
+    last: {
+      type: Object,
+      default: {
+        lastPage: 'empty',
+        length: 0
+      }
     }
   },
   mounted () {

@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as api from '@/common/urls'
+
 // import state from './states'
 // import mutations from './mutations'
 // import * as actions from './actions'
@@ -12,23 +14,25 @@ export default new Vuex.Store({
   },
   mutations: {
     setToken(state, token) {
-      wx.setStorageSync('token', token)
+      console.log('setToken')
+      wx.setStorageSync('token', token) // 存入缓存是为了下次进小程序时不用重新授权
       state.token = token
     }
   },
   actions: {
-    setToken(context) {
-      setTimeout(() => {
-        this.setToken()
-      }, 1000)
+    async asyncToken({ commit, state }, products) {
+      let { data } = await api.getToken(products)
+      console.log(data)
+      if (!data.code) {
+        wx.hideLoading()
+        commit('setToken', data.data.token)
+        wx.switchTab({
+          url: '/pages/shouye/main'
+        })
+      }
     }
   },
   getters: {
-    getToken(state) {
-      if (!state.token) {
-        state.token = wx.getStorageSync('token')
-      }
-      return state.token
-    }
+    getToken: state => state.token || wx.getStorageSync('token')
   }
 })

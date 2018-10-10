@@ -1,34 +1,34 @@
 <script>
-import store from "@/store/index";
+// import store from '@/store/index'
+import { mapGetters } from 'vuex'
+
 export default {
-  // computed: {
-  //   ...mapGetters({
-  //     getToken: 'getToken'
-  //   })
-  // },
+  computed: {
+    ...mapGetters({
+      getToken: 'getToken'
+    })
+  },
   data() {
     return {
-      tokens: ""
-    };
+      tokens: ''
+    }
   },
-  mounted() {
+  onLaunch() {
     // console.log('token', store.getters.getToken)
-    this._getToken();
+    this._getToken()
   },
   methods: {
     _getToken() {
-      let token = store.getters.getToken;
-      // let tokens = wx.getStorageSync('token')
+      // let token = store.getters.getToken
       // console.log(store.getters.getToken)
-      if (!token) {
-        console.log(11);
+      if (!this.getToken) {
         wx.reLaunch({
-          url: "./pages/token/main"
-        });
+          url: './pages/token/main'
+        })
       }
     }
   }
-};
+}
 </script>
 
 <style>
