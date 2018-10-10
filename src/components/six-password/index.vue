@@ -1,7 +1,7 @@
 <template>
   <article>
-    <section class="mask"></section>
-    <section class="pwd-modal" @click="getFocus">
+    <section class="mask" v-if="isInput"></section>
+    <section class="pwd-modal" v-if="isInput">
       <!-- <p class="close">X</p> -->
       <p class="title">输入查看密码</p>
       <ul>
@@ -11,8 +11,8 @@
         <li><i class="circle" v-if="password.length>=4"></i></li>
         <li><i class="circle" v-if="password.length>=5"></i></li>
         <li><i class="circle" v-if="password.length>=6"></i></li>
+        <input type="number" maxlength="6" v-model="password" @input="pwd" />
       </ul>
-      <input ref="inputs" :focus="isFocus" type="text" maxlength="6" v-model="password" @input="pwd" />
     </section>
   </article>
 </template>
@@ -23,6 +23,12 @@
       return {
         password: '',
         isFocus: false
+      }
+    },
+    props: {
+      isInput: {
+        type: Boolean,
+        default: false
       }
     },
     methods: {
@@ -40,7 +46,7 @@
 </script>
 
 <style lang='less' scoped>
-@import '../../styles/variables.less';
+@import '../../common/styles/elements.less';
     .mask {
       position: fixed;
       top: 0;
@@ -68,13 +74,14 @@
         text-align: center;
       }
       ul {
+        position: relative;
         display: flex;
         margin: 94rpx 38rpx 104rpx;
         li {
           width: 100%;
           height: 96rpx;
           line-height: 94rpx;
-          border: 1rpx solid  #ECECEB;
+          border: 1rpx solid  gray;
           border-right: 0 none;
           box-sizing: border-box;
           text-align: center;
@@ -89,13 +96,17 @@
           }
         }
         li:last-of-type {
-          border-right: 1rpx solid  #ECECEB;
+          border-right: 1rpx solid  gray;
         }
-      }
-      input {
-        text-indent: -9999rpx;
-        margin-left: -9999rpx;
-        opacity: 0;
+        input {
+          width:200%;
+          min-height: 100%;
+          position:absolute;
+          // text-indent:-999em;
+          left:-100%;
+          top:0;
+          z-index:1111111;
+        }
       }
     }
 </style>

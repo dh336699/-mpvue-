@@ -12,7 +12,7 @@
 // import Vue from 'vue'
 // import {toast} from '@/common/msgAlert'
 // import { transform13Time } from '@/utils/index'
-  import Calendar from '@/components/calendar/calendar'
+  import Calendar from 'components/calendar'
   export default {
     data() {
       return {

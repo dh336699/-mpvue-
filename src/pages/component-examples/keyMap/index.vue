@@ -10,7 +10,7 @@
 // import Vue from 'vue'
 // import {toast} from '@/common/msgAlert'
 // import { transform13Time } from '@/utils/index'
-  import KeyMap from '@/components/car-keymap/car-keymap'
+  import KeyMap from 'components/car-keymap'
   export default {
     data() {
       return {

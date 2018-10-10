@@ -1,6 +1,6 @@
 <template>
-  <article class="rater">
-    <Rater @ratingScore="ratingScore"></Rater>
+  <article>
+    <SixPsd :isInput="isInput"></SixPsd>
   </article>
 </template>
 
@@ -10,25 +10,19 @@
 // import Vue from 'vue'
 // import {toast} from '@/common/msgAlert'
 // import { transform13Time } from '@/utils/index'
-  import Rater from 'components/rater'
+  import SixPsd from 'components/six-password'
   export default {
     data() {
       return {
-      }
-    },
-    methods: {
-      ratingScore(val) {
-        console.log(val, '评分')
+        isInput: true
       }
     },
     components: {
-      Rater
+      SixPsd
     }
   }
 </script>
 
 <style lang='less' scoped>
-.rater {
-  min-height: 100%;
-}
+
 </style>

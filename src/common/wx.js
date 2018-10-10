@@ -10,14 +10,18 @@ export const toast2 = (title, icon = 'none', callback) => {
   wx.showToast({
     title,
     icon,
+    mask: true,
     success: callback
   })
 }
 export const setCookie = (key, value) => {
   wx.setStorageSync(key, value)
 }
+export const delCookie = (key) => {
+  wx.removeStorageSync(key)
+}
 export const getCookie = key => {
-  wx.getStorageSync(key)
+  return wx.getStorageSync(key)
 }
 export const chooseImgs = (count = 4) => {
   wx.chooseImage({

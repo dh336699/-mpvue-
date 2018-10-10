@@ -15,7 +15,7 @@ export default {
   },
   onLaunch() {
     // console.log('token', store.getters.getToken)
-    this._getToken()
+    // this._getToken()
   },
   methods: {
     _getToken() {

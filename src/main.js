@@ -21,7 +21,8 @@ export default {
       'pages/component-examples/calendar/main',
       'pages/component-examples/keyMap/main',
       'pages/component-examples/rater/main',
-      '^pages/component-examples/header/main'
+      'pages/component-examples/header/main',
+      '^pages/component-examples/sixPsd/main'
     ],
     window: {
       backgroundTextStyle: 'light',
