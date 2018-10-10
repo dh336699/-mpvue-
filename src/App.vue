@@ -14,13 +14,10 @@ export default {
     }
   },
   onLaunch() {
-    // console.log('token', store.getters.getToken)
     // this._getToken()
   },
   methods: {
     _getToken() {
-      // let token = store.getters.getToken
-      // console.log(store.getters.getToken)
       if (!this.getToken) {
         wx.reLaunch({
           url: './pages/token/main'
