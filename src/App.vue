@@ -14,7 +14,7 @@ export default {
     }
   },
   onLaunch() {
-    // this._getToken()
+    this._getToken()
   },
   methods: {
     _getToken() {
@@ -22,6 +22,8 @@ export default {
         wx.reLaunch({
           url: './pages/token/main'
         })
+      } else {
+        return
       }
     }
   }
@@ -38,9 +40,10 @@ page {
   height: 0;
   color: transparent;
 }
-.gray {
-  background: rgba(196, 196, 196, 0.4);
-}
+/* 按下去灰色的效果 */
+  .gray {
+    background: rgba(196, 196, 196, .4);
+  }
 .container {
   height: 100%;
   display: flex;
