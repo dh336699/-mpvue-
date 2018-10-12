@@ -14,7 +14,7 @@ export default {
     }
   },
   onLaunch() {
-    // this._getToken()
+    this._getToken()
   },
   methods: {
     _getToken() {
@@ -22,6 +22,8 @@ export default {
         wx.reLaunch({
           url: './pages/token/main'
         })
+      } else {
+        return
       }
     }
   }
