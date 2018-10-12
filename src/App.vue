@@ -1,27 +1,24 @@
 <script>
-import store from '@/store/index'
+// import store from '@/store/index'
+import { mapGetters } from 'vuex'
+
 export default {
-    // computed: {
-    //   ...mapGetters({
-    //     getToken: 'getToken'
-    //   })
-    // },
+  computed: {
+    ...mapGetters({
+      getToken: 'getToken'
+    })
+  },
   data() {
     return {
       tokens: ''
     }
   },
-  mounted() {
-      // console.log('token', store.getters.getToken)
-    this._getToken()
+  onLaunch() {
+    // this._getToken()
   },
   methods: {
     _getToken() {
-      let token = store.getters.getToken
-        // let tokens = wx.getStorageSync('token')
-        // console.log(store.getters.getToken)
-      if (!token) {
-        console.log(11)
+      if (!this.getToken) {
         wx.reLaunch({
           url: './pages/token/main'
         })
@@ -32,16 +29,18 @@ export default {
 </script>
 
 <style>
-@import url("~mpvue-wxparse/src/wxParse.css");
-  page {
-    height: 100%;
-    background: #EFEFF4;
-  }
-  ::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-    color: transparent;
-  }
+page {
+  height: 100%;
+  background: #efeff4;
+}
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+  color: transparent;
+}
+.gray {
+  background: rgba(196, 196, 196, 0.4);
+}
 .container {
   height: 100%;
   display: flex;
@@ -57,24 +56,24 @@ export default {
   font-size: 36rpx;
   color: RGBA(187, 187, 187, 1);
 }
-  .choose {
-    color: #BBBBBB;
-  }
+.choose {
+  color: #bbbbbb;
+}
 
-  .wx-switch-input{
-    width:79rpx !important;
-    height:48rpx !important;
-  }
-  /*白色样式（false的样式）*/
-  .wx-switch-input::before{
-    width:79rpx !important;
-    height:48rpx !important;
-  }
-  /*绿色样式（true的样式）*/
-  .wx-switch-input::after{
-    width: 43rpx !important;
-    height: 43rpx !important;
-  }
+.wx-switch-input {
+  width: 79rpx !important;
+  height: 48rpx !important;
+}
+/*白色样式（false的样式）*/
+.wx-switch-input::before {
+  width: 79rpx !important;
+  height: 48rpx !important;
+}
+/*绿色样式（true的样式）*/
+.wx-switch-input::after {
+  width: 43rpx !important;
+  height: 43rpx !important;
+}
 /* this rule will be remove */
 * {
   transition: width 2s;

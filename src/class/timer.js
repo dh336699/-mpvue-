@@ -32,9 +32,15 @@ export default class Timer {
       }
       self.lastTime = r.join('')
       update.call(self, r.join(''))
-      setTimeout(() => {
-        self.countDown(end, update, handle)
-      }, 1000)
+      if (!self.lastTime) {
+        update.call(self, '00:00')
+        self.clears(interval)
+        // clearInterval(interval)
+      } else {
+        var interval = setTimeout(() => {
+          self.countDown(end, update, handle)
+        }, 1000)
+      }
     }
   }
   _padStart0(s) {
@@ -43,4 +49,10 @@ export default class Timer {
     // s = parseInt(s)
     return s
   }
+  clears(interval) {
+    clearInterval(interval)
+  }
 }
+// update(e) {
+//   this.endTime = e
+// }

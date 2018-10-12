@@ -19,9 +19,9 @@
       <scroll-view scroll-y="true" :style="{'height': calendarHeight + 'rpx'}">
         <ul class="days">
           <div class="title">{{year}}-{{month}}</div>
-          <li v-if="today30day" :style='{marginLeft: marginleft + "rpx"}' :class="{'currentItem' : one,  'noOrder': currkeys === false}"
+          <li v-if="!today30day" :style='{marginLeft: marginleft + "rpx"}' :class="{'currentItem' : one,  'noOrder': currkeys === false}"
             @click="chooseOne">1</li>
-          <li v-else :style='{marginLeft: marginleft + "rpx"}' :class="{'currentItem' : one, 'no-selected': 1 <= today, 'noOrder': currkeys === false}"
+          <li v-else :style='{marginLeft: marginleft + "rpx"}' :class="{'currentItem' : one, 'no-selected': 1 < today, 'noOrder': currkeys === false}"
             @click="chooseOne">1</li>
           <li :class="{'currentItem' : item.state, 'no-selected': item.selected === false, 'noOrder': item.time === false}" v-for="(item, index) in currMonthDays"
             :key="index +100" @click="chooseDay(month, item)">
@@ -29,9 +29,9 @@
             <p v-else-if="item.today">今天</p>
           </li>
           <div class="title">{{year}}-{{nextMonth}}</div>
-          <li v-if="today30day" :style='{marginLeft: marginlefts + "rpx"}' :class="{'currentItem' : two, 'noOrder': Nextkeys === false}"
+          <li v-if="!today30day" :style='{marginLeft: marginlefts + "rpx"}' :class="{'currentItem' : two, 'noOrder': Nextkeys === false}"
             @click="chooseTwo">1</li>
-          <li v-else :style='{marginLeft: marginlefts + "rpx"}' :class="{'currentItem' : two, 'no-selected': nextToday <= 0, 'noOrder': Nextkeys === false}"
+          <li v-else :style='{marginLeft: marginlefts + "rpx"}' :class="{'currentItem' : two, 'no-selected': 1 < nextToday, 'noOrder': Nextkeys === false}"
             @click="chooseTwo">1</li>
           <li :class="{'currentItem' : item.state, 'no-selected': item.selected === false, 'noOrder': item.time === false}" v-for="item in nextMonthDays"
             :key="item.day" @click="chooseDay(nextMonth, item)">{{item.day}}</li>
@@ -82,7 +82,7 @@
         type: Boolean,
         default: false
       },
-      dateArraylist: {
+      dateArraylist: { // 日期下时间的预定情况
         type: Map,
         default () {
           return new Map()
@@ -90,6 +90,7 @@
       }
     },
     mounted() {
+      console.log(this.dateArraylist)
       this._initMonth() // 月份前 + 0
       this._initCalendatHeight() // 动态计算日历高度
       if (!this.today30day) {
@@ -97,8 +98,7 @@
       } else {
         this._getMonthDay()
       }
-      this._oneToWeek()
-      // console.log(this.dateArraylist)
+      this._oneToWeek() // 计算星期
     },
     methods: {
       closeCalendar() {
@@ -114,7 +114,7 @@
         let year = day.getFullYear()
         let currMonth = day.getMonth() + 1
         currMonth = this._initSelected(currMonth)
-        this.date = `${year}-${currMonth}-01`
+        this.date = `${year}-${currMonth}-01` // 返回的时间格式
         let currDayOrderInfo = {
           date: this.date,
           time: this.currkeys
@@ -154,7 +154,7 @@
         let year = day.getFullYear()
         item.day = this._initSelected(item.day)
         item.currMonth = this._initSelected(item.currMonth)
-        console.log(item.day)
+        console.log(item)
         this.date = `${year}-${item.currMonth}-${item.day}`
         // console.log(this.date)
         let currDayOrderInfo = {
@@ -197,18 +197,11 @@
         days.setDate(0)
         // 这里根据月份获取当前月有多少天,这个月份对应现实的月份,而不是[0-11]里的
         let currMonthDays = days.getDate()
-        today30day = today30day - currMonthDays
-        this.nextToday = today30day
+        console.log(currMonthDays, 'currMonthDayscurrMonthDays')
+        today30day = today30day - today
+        this.nextToday = this.today
         console.log(today30day) // 当前日期往后30天过后无法选中
         let arr1 = []
-        // let falseDay = []
-        // for (let key of this.dateArraylist.keys()) {
-        //   console.log(this.dateArraylist.get(key))
-        //   if (this.dateArraylist.get(key) === false) {
-        //     falseDay.push(key)
-        //   }
-        // }
-        // console.log(falseDay)
         for (let a = 0; a < currMonthDays; a++) {
           let time = 2
           let obj1 = {}
@@ -216,7 +209,7 @@
           for (let key of this.dateArraylist.keys()) {
             let mon = key.substr(5, 2)
             let keys = key.substr(key.length - 2, 2) // '2018-08-02' 截取日期，并和当前月的日期进行匹配，若相同，则给日期赋值当天的信息
-            let curMonth = days.getMonth() + 1 // 获取当前月
+            let curMonth = currMonth + 1 // 获取当前月
             curMonth = curMonth.toString()
             curMonth = curMonth.padStart(2, '0')
             // console.log(curMonth, 'Key')
@@ -254,13 +247,12 @@
         arr1.splice(-1, 1)
         this.currMonthDays = arr1
         // console.log(this.currMonthDays)
-        console.log(currMonthDays, 'currMonthDays')
 
         // 获取下个月天数,此时月份是0-11,月份需加2,例如:当月月份是 0-11中的4,此时本月对应的是5,则下月是6
-        days.setMonth(currMonth + 1)
+        days.setMonth(currMonth + 2)
+        days.setDate(0)
         let nextMonth = days.getMonth() + 1
         // 将日期设置为0, 这里为什么要这样设置, 我不知道原因, 这是从网上学来的
-        days.setDate(0)
         // 返回下个月的天数
         let nextMonthDays = days.getDate()
         console.log(nextMonthDays, 'nextMonthDays')
@@ -272,7 +264,8 @@
           for (let key of this.dateArraylist.keys()) {
             let mon = key.substr(5, 2)
             let keys = key.substr(key.length - 2, 2) // '2018-08-02' 截取日期，并和当前月的日期进行匹配，若相同，则给日期赋值当天的信息
-            let nexMonth = days.getMonth() + 1 // 获取当前月
+            let nexMonth = currMonth + 2 // 获取当前月
+            // console.log(nexMonth, '当前月')
             nexMonth = nexMonth.toString()
             nexMonth = nexMonth.padStart(2, '0')
             if (Number(keys) === time && Number(mon) === Number(nexMonth)) {
@@ -282,7 +275,7 @@
               // console.log(this.Nextkeys, 'this.Nextkeys')
             }
           }
-          if (time >= today30day) {
+          if (time > this.today) {
             obj2.selected = false // 灰色的无法选中的
             obj2.currMonth = nextMonth // 拼入字段下个月
             obj2.day = time // 拼入字段当前日
@@ -316,17 +309,17 @@
           let time = 2
           let obj1 = {}
           time += a
-          if (time === today) {
+          if (time === today) { // 用于判断当然日期是今天，日历显示为今天
             obj1.currMonth = currMonth + 1 // 拼入字段当前月
             obj1.day = time // 拼入字段当前日
             obj1.state = false // 拼入字段当前选中状态
-            obj1.today = true
+            obj1.today = true // 显示今天
             this.currMonthDays.push(obj1)
-          } else if (time <= today) {
+          } else if (time <= today) { // 当天之前的日期是否可以选中
             obj1.currMonth = currMonth + 1 // 拼入字段当前月
             obj1.day = time // 拼入字段当前日
             obj1.state = false // 拼入字段当前选中状态
-            // obj1.selected = false // 当天之前的是否可以选中
+            obj1.selected = false // 当天之前的是否可以选中
             this.currMonthDays.push(obj1)
           } else {
             obj1.currMonth = currMonth + 1 // 拼入字段当前月
@@ -339,7 +332,7 @@
           obj1.state = false // 拼入字段当前选中状态
           arr1.push(obj1)
         }
-        // 获取当月有多少天
+        // 获取当月有多少天（因为是从二号开始算的，所以最后一天会比正常多一天）
         arr1.splice(-1, 1)
         this.currMonthDays = arr1
         console.log(currMonthDays, 'currMonthDays')

@@ -5,10 +5,15 @@
   </div>
 </template>
 <script>
-  import {getToken} from '@/common/urls'
+  import { mapGetters, mapMutations, mapActions } from 'vuex'
   export default {
+    computed: {
+      ...mapGetters({
+        token: 'getToken'
+      })
+    },
     mounted() {
-      let token = wx.getStorageSync('token')
+      let token = this.token
       if (!token) {
         return
       } else {
@@ -18,6 +23,12 @@
       }
     },
     methods: {
+      ...mapMutations({
+        setToken: 'setToken'
+      }),
+      ...mapActions({
+        asyncToken: 'asyncToken'
+      }),
       getUserInfo (e) {
         let _this = this
         let userInfo = e.target.userInfo ? e.target.userInfo : ''
@@ -43,22 +54,15 @@
           }
         })
       },
-      _getToken(data) {
-        getToken(data).then((res) => {
-          console.log(res)
-          wx.hideLoading()
-          wx.setStorageSync('token', res.data.data.token)
-          wx.switchTab({
-            url: '/pages/shouye/main'
-          })
-        }).catch((msg) => {
-          console.log(msg)
-          wx.hideLoading()
-          wx.setStorageSync('token', msg.data.data.token)
-          wx.switchTab({
-            url: '/pages/shouye/main'
-          })
-        })
+      async _getToken(data) {
+        const da = {
+          code: data.code,
+          mpid: 10087,
+          nickname: data.nickname,
+          headimgurl: data.headimgurl,
+          gender: data.gender
+        }
+        this.asyncToken(da)
       }
     }
   }

@@ -69,16 +69,15 @@
         type: Boolean,
         default: false
       },
-      buttonBorder: {
+      buttonBorder: { // 按键边框色
         type: String,
         default: '1px solid #ccc'
       },
-      backgroundColor: {
+      backgroundColor: { // 按键背景色
         type: String,
         default: '#fff'
       },
-      // 1为省份键盘，其它为英文键盘
-      keyBoardType: {
+      keyBoardType: { // 1为省份键盘，其它为英文键盘
         type: Number,
         default: 1
       }
@@ -120,6 +119,7 @@
       flex-direction: column;
       justify-content: center;
       z-index: 1000;
+      background: white;
     }
     .vehicle-panel-row {
       display: flex;
