@@ -45,7 +45,6 @@ export function transform13Times(timestamp, type) {
     return Y + M + D + h + m + s
   }
 }
-
 // 倒计时60s函数
 export const time60s = (timeNum, showTime) => {
   console.log(timeNum)
