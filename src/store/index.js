@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import * as api from '@/common/urls'
+import * as api from '@/api'
 
 // import state from './states'
 // import mutations from './mutations'

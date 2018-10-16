@@ -8,3 +8,6 @@
   background: rgba(0, 0, 0, 0.6);
   z-index: 1;
 }
+.box-shadow {
+  box-shadow: 0rpx 4rpx 8rpx 0rpx rgba(213, 212, 212, 0.5);
+}

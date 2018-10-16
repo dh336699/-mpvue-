@@ -1,3 +1,6 @@
+// 微信常用api封装 引入方式 import * as xx from 'wx'
+// 使用：xx.toast('显示弹框')
+
 export const toast = (msg, callback) => {
   wx.showModal({
     title: '提示',
