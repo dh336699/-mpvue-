@@ -10,7 +10,7 @@
   import Vue from 'vue'
 // import {toast} from '@/common/msgAlert'
 // import { transform13Time } from '@/utils/index'
-  import MHeader from 'components/sixHeader'
+  import MHeader from 'components/six-header'
   export default {
     data() {
       return {

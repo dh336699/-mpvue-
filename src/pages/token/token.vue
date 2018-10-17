@@ -1,6 +1,7 @@
 <template lang="html">
   <div class="authorize">
-    <img src="/static/images/logo@2x.png" class="logo">
+    <!-- 登录授权页面，样式以及跳转路径，根据自己需要进行修改， -->
+    <img src="/static/images/home_image1@2x.png" class="logo">
     <button type="primary" name="button" open-type="getUserInfo" @getuserinfo="getUserInfo">授权微信用户信息</button>
   </div>
 </template>

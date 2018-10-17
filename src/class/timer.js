@@ -1,3 +1,4 @@
+// 倒计时类
 export default class Timer {
   countDown(end, update, handle) {
     let now = new Date().getTime()
