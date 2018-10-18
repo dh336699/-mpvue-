@@ -1,3 +1,4 @@
+import * as xx from './wx'
 // 时间戳处理函数 转换的格式为：2018-1-2 => 2018-01-02 || 2018-01-02 10:00:00
 export function transform13Time(timestamp, type) {
   // var date = new Date(timestamp * 1000) // 时间戳为10位需*1000，时间戳为13位的话不需乘1000
@@ -107,10 +108,10 @@ export const uploadFun = (i, res, key, img, imgPass, url) => {
 }
 
 // 保存图片到本地
-export const saveImg =(url) => {
+export const saveImg = (url) => {
   this._getAuthorize(url)
 }
-export const _saveImg =(url) => {
+export const _saveImg = (url) => {
   wx.downloadFile({ // 下载图片
     url,
     success: function(res) {
@@ -132,7 +133,7 @@ export const _saveImg =(url) => {
           if (err.errMsg === 'saveImageToPhotosAlbum:fail:auth denied') {
             console.log('当初用户拒绝，再次发起授权')
             // wx.hideLoading()
-            toast('提示', '授权失败，请重新授权', () => {
+            xx.toast('提示', '授权失败，请重新授权', () => {
               wx.openSetting({
                 success(settingdata) {
                   console.log(settingdata)
@@ -156,7 +157,7 @@ export const _saveImg =(url) => {
     }
   })
 }
-export const _getAuthorize =(url) => {
+export const _getAuthorize = (url) => {
   let that = this
   wx.getSetting({ // 获取授权
     success(res) {
@@ -172,7 +173,7 @@ export const _getAuthorize =(url) => {
             that._saveImg()
           },
           fail() {
-            toast('提示', '拒绝授权将无法保存图片')
+            xx.toast('提示', '拒绝授权将无法保存图片')
           }
         })
       } else {
