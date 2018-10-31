@@ -196,7 +196,8 @@
         days.setMonth(currMonth + 1)
         days.setDate(0)
         // 这里根据月份获取当前月有多少天,这个月份对应现实的月份,而不是[0-11]里的
-        let currMonthDays = days.getDate()
+        // let currMonthDays = days.getDate()
+        let currMonthDays = this.mGetDate()
         console.log(currMonthDays, 'currMonthDayscurrMonthDays')
         today30day = today30day - today
         this.nextToday = this.today
@@ -254,7 +255,8 @@
         let nextMonth = days.getMonth() + 1
         // 将日期设置为0, 这里为什么要这样设置, 我不知道原因, 这是从网上学来的
         // 返回下个月的天数
-        let nextMonthDays = days.getDate()
+        // let nextMonthDays = days.getDate()
+        let nextMonthDays = this.nGetDate()
         console.log(nextMonthDays, 'nextMonthDays')
         let arr2 = []
         for (let a = 0; a < nextMonthDays; a++) {
@@ -303,7 +305,7 @@
         days.setMonth(currMonth + 1)
         days.setDate(0)
         // 这里根据月份获取当前月有多少天,这个月份对应现实的月份,而不是[0-11]里的
-        let currMonthDays = days.getDate()
+        let currMonthDays = this.mGetDate()
         let arr1 = []
         for (let a = 0; a < currMonthDays; a++) {
           let time = 2
@@ -343,7 +345,7 @@
         // 将日期设置为0, 这里为什么要这样设置, 我不知道原因, 这是从网上学来的
         days.setDate(0)
         // 返回下个月的天数
-        let nextMonthDays = days.getDate()
+        let nextMonthDays = this.nGetDate()
         console.log(nextMonthDays, 'nextMonthDays')
         let arr2 = []
         for (let a = 0; a < nextMonthDays; a++) {
@@ -357,6 +359,20 @@
         }
         arr2.splice(-1, 1)
         this.nextMonthDays = arr2
+      },
+      mGetDate() {
+        var date = new Date()
+        var year = date.getFullYear()
+        var month = date.getMonth() + 1
+        var d = new Date(year, month, 0)
+        return d.getDate()
+      },
+      nGetDate() {
+        var date = new Date()
+        var year = date.getFullYear()
+        var month = date.getMonth() + 2
+        var d = new Date(year, month, 0)
+        return d.getDate()
       },
       _oneToWeek() {
         let weekDay = [0, 1, 2, 3, 4, 5, 6]
