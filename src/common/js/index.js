@@ -189,3 +189,31 @@ export const _getAuthorize = (url) => {
     }
   })
 }
+// 语音播放
+export const audioPlay = item => {
+  if (!item.audioPlay) {
+    this.list.forEach(it => {
+      it.audioPlay = false
+      it.innerAudioContext.destroy()
+      this.$set(it, 'innerAudioContext', wx.createInnerAudioContext())
+    })
+    item.innerAudioContext.autoplay = true
+    item.innerAudioContext.src = item.graphicVoiceDesc
+    // item.duration = this.innerAudioContext.duration
+    console.log('进入')
+    item.innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+      // this.$set(item, 'duration', this.innerAudioContext.duration)
+    })
+    item.innerAudioContext.onEnded(() => {
+      item.audioPlay = false
+      item.innerAudioContext = {}
+    })
+    item.audioPlay = true
+    item.audioPlayStatus = true
+  } else {
+    item.innerAudioContext.destroy()
+    this.$set(item, 'innerAudioContext', wx.createInnerAudioContext())
+    item.audioPlay = false
+  }
+}
