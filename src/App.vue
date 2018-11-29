@@ -31,6 +31,7 @@ export default {
 </script>
 
 <style>
+@import url("~mpvue-wxparse/src/wxParse.css");
 page {
   height: 100%;
   background: #efeff4;
