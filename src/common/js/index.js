@@ -109,7 +109,7 @@ export const uploadFun = (i, res, key, img, imgPass, url) => {
 
 // 保存图片到本地
 export const saveImg = (url) => {
-  this._getAuthorize(url)
+  _getAuthorize(url)
 }
 export const _saveImg = (url) => {
   wx.downloadFile({ // 下载图片
@@ -158,7 +158,6 @@ export const _saveImg = (url) => {
   })
 }
 export const _getAuthorize = (url) => {
-  let that = this
   wx.getSetting({ // 获取授权
     success(res) {
       if (!res.authSetting['scope.writePhotosAlbum']) {
@@ -170,7 +169,7 @@ export const _getAuthorize = (url) => {
               title: '保存中...',
               mask: true
             })
-            that._saveImg()
+            _saveImg()
           },
           fail() {
             xx.toast('提示', '拒绝授权将无法保存图片')
@@ -181,7 +180,7 @@ export const _getAuthorize = (url) => {
           title: '保存中...',
           mask: true
         })
-        that._saveImg(url)
+        _saveImg(url)
       }
     },
     fail(ret) {
@@ -190,30 +189,26 @@ export const _getAuthorize = (url) => {
   })
 }
 // 语音播放
-export const audioPlay = item => {
-  if (!item.audioPlay) {
-    this.list.forEach(it => {
-      it.audioPlay = false
-      it.innerAudioContext.destroy()
-      this.$set(it, 'innerAudioContext', wx.createInnerAudioContext())
-    })
-    item.innerAudioContext.autoplay = true
-    item.innerAudioContext.src = item.graphicVoiceDesc
-    // item.duration = this.innerAudioContext.duration
-    console.log('进入')
-    item.innerAudioContext.onPlay(() => {
-      console.log('开始播放')
-      // this.$set(item, 'duration', this.innerAudioContext.duration)
-    })
-    item.innerAudioContext.onEnded(() => {
-      item.audioPlay = false
-      item.innerAudioContext = {}
-    })
-    item.audioPlay = true
-    item.audioPlayStatus = true
-  } else {
-    item.innerAudioContext.destroy()
-    this.$set(item, 'innerAudioContext', wx.createInnerAudioContext())
+if (!item.audioPlay) {
+  this.list.forEach(it => { // 遍历 停止其他正在播放的语音
+    it.audioPlay = false
+    it.innerAudioContext.destroy()
+    this.$set(it, 'innerAudioContext', wx.createInnerAudioContext())
+  })
+  item.innerAudioContext.autoplay = true
+  item.innerAudioContext.src = item.src
+  item.audioPlay = true
+  item.innerAudioContext.onPlay(() => {
+    console.log('开始播放')
+    // this.$set(item, 'duration', this.innerAudioContext.duration)
+  })
+  item.innerAudioContext.onEnded(() => { // 监听播放结束时  重置当前播放对象
     item.audioPlay = false
-  }
+    item.innerAudioContext.destroy()
+    item.innerAudioContext = wx.createInnerAudioContext()
+  })
+} else {
+  item.innerAudioContext.destroy()
+  this.$set(item, 'innerAudioContext', wx.createInnerAudioContext())
+  item.audioPlay = false
 }
