@@ -19,7 +19,7 @@ export const request = (url, method, data, needToken) => {
     }
   })
 }
- // 不需要Token
+// 不需要Token
 export const unExpectToken = (url, method, data, resolve, reject) => {
   wx.request({
     url: config.request.baseURL + url, // 接口地址,
@@ -36,7 +36,7 @@ export const unExpectToken = (url, method, data, resolve, reject) => {
     }
   })
 }
- // 需要Token
+// 需要Token
 export const expectToken = (url, method, data, resolve, reject) => {
   wx.request({
     url: config.request.baseURL + url, // 接口地址,

@@ -10,17 +10,17 @@
 // import Vue from 'vue'
 // import {toast} from '@/common/msgAlert'
 // import { transform13Time } from '@/utils/index'
-  import SixPsd from 'components/six-password'
-  export default {
-    data() {
-      return {
-        isInput: true
-      }
-    },
-    components: {
-      SixPsd
+import SixPsd from 'components/six-password'
+export default {
+  data() {
+    return {
+      isInput: true
     }
+  },
+  components: {
+    SixPsd
   }
+}
 </script>
 
 <style lang='less' scoped>

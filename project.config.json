@@ -1,16 +1,16 @@
 {
 	"description": "项目配置文件。",
 	"setting": {
-		"urlCheck": false,
+		"urlCheck": true,
 		"es6": false,
 		"postcss": true,
 		"minified": true,
 		"newFeature": true
 	},
-	"miniprogramRoot": "./dist/",
+	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
-	"appid": "wx0a6272c85b654c4e",
-	"projectname": "yizao",
+	"appid": "touristappid",
+	"projectname": "mapvue-new",
 	"condition": {
 		"search": {
 			"current": -1,

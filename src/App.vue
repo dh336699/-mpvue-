@@ -22,8 +22,6 @@ export default {
         wx.reLaunch({
           url: './pages/token/main'
         })
-      } else {
-        return
       }
     }
   }

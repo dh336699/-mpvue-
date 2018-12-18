@@ -10,21 +10,21 @@
 // import Vue from 'vue'
 // import {toast} from '@/common/msgAlert'
 // import { transform13Time } from '@/utils/index'
-  import Rater from 'components/rater'
-  export default {
-    data() {
-      return {
-      }
-    },
-    methods: {
-      ratingScore(val) {
-        console.log(val, '评分')
-      }
-    },
-    components: {
-      Rater
+import Rater from 'components/rater'
+export default {
+  data() {
+    return {
     }
+  },
+  methods: {
+    ratingScore(val) {
+      console.log(val, '评分')
+    }
+  },
+  components: {
+    Rater
   }
+}
 </script>
 
 <style lang='less' scoped>
