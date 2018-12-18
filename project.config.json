@@ -10,7 +10,7 @@
 	"miniprogramRoot": "dist/wx/",
 	"compileType": "miniprogram",
 	"appid": "touristappid",
-	"projectname": "mapvue-new",
+	"projectname": "mapvue-new-git",
 	"condition": {
 		"search": {
 			"current": -1,
